@@ -13,7 +13,7 @@ const graphTemplate = `
     <p>{{graph.numCrossings(graph.graph)}}</p>
   </div>
   <div>
-    <svg width="800" height="1000">
+    <svg width="1000" height="500">
       <g transform="translate(80,20)">
         <g>
           <path
@@ -49,7 +49,7 @@ angular.module(modName, []).directive('graph', (layout) => {
   const curveTo = ([x1, y1], [x2, y2]) => {
     const dx = x2 - x1,
           dy = y2 - y1;
-    return ` q ${dx / 4} ${0}, ${dx / 2} ${dy / 2} q ${dx / 4} ${dy / 2}, ${dx / 2} ${dy / 2}`;
+    return ` q ${0} ${dy / 4}, ${dx / 2} ${dy / 2} q ${dx / 2} ${dy / 4}, ${dx / 2} ${dy / 2}`;
   };
 
   return {

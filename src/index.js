@@ -10,6 +10,8 @@ import example1 from "./components/example1"
 import example2 from "./components/example2"
 import example3 from "./components/example3"
 import example4 from "./components/example4"
+import example5 from "./components/example5"
+import random from "./components/random"
 
 const hasMiddle = (g) => {
   return g.vertices().filter((u) => g.inDegree(u) > 0 && g.outDegree(u) > 0).length > 0;
@@ -21,7 +23,9 @@ angular.module('app', [
   example1,
   example2,
   example3,
-  example4
+  example4,
+  example5,
+  random
 ])
 .factory('genGraph', () => {
   return (n, m, p) => {
@@ -50,15 +54,16 @@ angular.module('app', [
 })
 .factory('layouter', () => {
   return new Sugiyama()
+    .ltor(false)
     .vertexWidth(({d}) => d.dummy ? 0 : 10)
     .vertexHeight(({d}) => d.dummy ? 0 : 10)
     .edgeWidth(() => 1)
-    .vertexMargin(40)
+    .layerMargin(40)
     .edgeMargin(20);
 })
 .factory('layout', (layouter) => {
   return (graph) => {
-    layouter.layerMargin(hasMiddle(graph) ? 250 : 500);
+    layouter.vertexMargin(hasMiddle(graph) ? 150 : 300);
     const result = layouter.layout(graph),
           vertices = [],
           edges = [];
